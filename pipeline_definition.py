@@ -11,7 +11,6 @@ import h5py
 import tensorflow_probability as tfp
 from tensorflow_probability import distributions as tfd
 from tensorflow_probability import layers as tfpl
-
 from time import process_time
 import sklearn
 import seaborn as sns
