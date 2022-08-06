@@ -1,3 +1,4 @@
+# all of the code should be executed in a python console
 import os
 
 #if you want to clean the data, run this block of code, remember to change the parameters first
