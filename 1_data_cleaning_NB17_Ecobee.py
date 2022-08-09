@@ -7,17 +7,17 @@ import general_parameters
 
 np.random.seed(general_parameters.random_seed)
 
-data_path = [r'\data\meta_data\NB17_danmini\danmini_doorbell_benign_traffic.csv',
-             r'\data\meta_data\NB17_danmini\mirai_attacks\ack.csv',
-             r'\data\meta_data\NB17_danmini\mirai_attacks\scan.csv',
-             r'\data\meta_data\NB17_danmini\mirai_attacks\syn.csv',
-             r'\data\meta_data\NB17_danmini\mirai_attacks\udp.csv',
-             r'\data\meta_data\NB17_danmini\mirai_attacks\udpplain.csv',
-             r'\data\meta_data\NB17_danmini\gafgyt_attacks\combo.csv',
-             r'\data\meta_data\NB17_danmini\gafgyt_attacks\junk.csv',
-             r'\data\meta_data\NB17_danmini\gafgyt_attacks\scan.csv',
-             r'\data\meta_data\NB17_danmini\gafgyt_attacks\tcp.csv',
-             r'\data\meta_data\NB17_danmini\gafgyt_attacks\udp.csv',]
+data_path = [r'\data\meta_data\NB17_ecobee\ecobee_thermostat_benign_traffic.csv',
+             r'\data\meta_data\NB17_ecobee\mirai_attacks\ack.csv',
+             r'\data\meta_data\NB17_ecobee\mirai_attacks\scan.csv',
+             r'\data\meta_data\NB17_ecobee\mirai_attacks\syn.csv',
+             r'\data\meta_data\NB17_ecobee\mirai_attacks\udp.csv',
+             r'\data\meta_data\NB17_ecobee\mirai_attacks\udpplain.csv',
+             r'\data\meta_data\NB17_ecobee\gafgyt_attacks\combo.csv',
+             r'\data\meta_data\NB17_ecobee\gafgyt_attacks\junk.csv',
+             r'\data\meta_data\NB17_ecobee\gafgyt_attacks\scan.csv',
+             r'\data\meta_data\NB17_ecobee\gafgyt_attacks\tcp.csv',
+             r'\data\meta_data\NB17_ecobee\gafgyt_attacks\udp.csv',]
 data_list = []
 for i in range(len(data_path)):
     inputdata = pd.read_csv(general_parameters.project_dir+data_path[i],header='infer',engine='python')
@@ -43,6 +43,6 @@ data_val = data_val.reset_index(drop=True)
 data_test = data_test.reset_index(drop=True)
 
 
-data_train.to_hdf(general_parameters.project_dir+r'\data\intermediate_data\nb17_danmini_data_train.h5',key='nb17_danmini_data_train')
-data_val.to_hdf(general_parameters.project_dir+r'\data\intermediate_data\nb17_danmini_data_val.h5',key='nb17_danmini_data_val')
-data_test.to_hdf(general_parameters.project_dir+r'\data\intermediate_data\nb17_danmini_data_test.h5',key='nb17_danmini_data_test')
+data_train.to_hdf(general_parameters.project_dir+r'\data\intermediate_data\nb17_ecobee_data_train.h5',key='nb17_ecobee_data_train')
+data_val.to_hdf(general_parameters.project_dir+r'\data\intermediate_data\nb17_ecobee_data_val.h5',key='nb17_ecobee_data_val')
+data_test.to_hdf(general_parameters.project_dir+r'\data\intermediate_data\nb17_ecobee_data_test.h5',key='nb17_ecobee_data_test')
