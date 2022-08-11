@@ -18,7 +18,7 @@ data_type = args.data_type
 resampling_type = args.resampling_type
 resampling_ratio = args.resampling_ratio
 
-
+#data_type = 'nb17_danmini'
 
 data_train = pd.read_hdf(general_parameters.project_dir+r'\data\intermediate_data\\'+data_type+'_data_train.h5',
                             key=data_type+'_data_train')
@@ -29,17 +29,7 @@ data_test = pd.read_hdf(general_parameters.project_dir+r'\data\intermediate_data
 
 
 #read data into a dataframe
-if data_type == 'nb15':
-    input_feature_list = ['sport', 'dsport', 'proto', 'state', 'dur', 'sbytes', 'dbytes', 'sttl', 'dttl', 'sloss', 'dloss',
-                      'service', 'Sload', 'Dload', 'Spkts', 'Dpkts', 'swin', 'dwin', 'stcpb', 'dtcpb', 'smeansz',
-                      'dmeansz', 'trans_depth', 'res_bdy_len', 'Sjit', 'Djit', 'Sintpkt', 'Dintpkt', 'tcprtt', 'synack',
-                      'ackdat', 'is_sm_ips_ports', 'ct_state_ttl', 'ct_srv_src', 'ct_srv_dst', 'ct_dst_ltm', 'ct_src_ltm',
-                      'ct_src_dport_ltm', 'ct_dst_sport_ltm', 'ct_dst_src_ltm']
-elif data_type == 'kdd99':
-    input_feature_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-                  '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24', '25',
-                  '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37',
-                  '38', '39', '40']
+input_feature_list = general_parameters.input_feature_list[data_type]
 
 resampling_ratio_table = pd.DataFrame(data_train.groupby('attack_cat').count()).iloc[:,0].reset_index()
 resampling_ratio_table.columns = ['attack_cat','original']

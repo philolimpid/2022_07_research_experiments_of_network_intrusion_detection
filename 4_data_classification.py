@@ -36,12 +36,14 @@ parser = argparse.ArgumentParser(description='deliver resampling parameters')
 parser.add_argument('data_type',type=str)
 parser.add_argument('resampling_type',type=str)
 parser.add_argument('resampling_ratio',type=float)
+parser.add_argument('classifier',type=str)
 parser.add_argument('version',type=str)
 args = parser.parse_args()
 print(args)
 data_type = args.data_type
 resampling_type = args.resampling_type
 resampling_ratio = args.resampling_ratio
+classifier = args.classifier
 version = args.version
 
 class class_of_data_block():
@@ -80,33 +82,15 @@ def one_hot(data_block):
     return data_block
 
 
-for model in ['ANN', 'DTR']:
-    if data_type == 'nb15':
-        input_feature_list = ['sport', 'dsport', 'proto', 'state', 'dur', 'sbytes', 'dbytes', 'sttl',
-                              'dttl', 'sloss',
-                              'dloss',
-                              'service', 'Sload', 'Dload', 'Spkts', 'Dpkts', 'swin', 'dwin', 'stcpb',
-                              'dtcpb',
-                              'smeansz',
-                              'dmeansz', 'trans_depth', 'res_bdy_len', 'Sjit', 'Djit', 'Sintpkt',
-                              'Dintpkt', 'tcprtt',
-                              'synack',
-                              'ackdat', 'is_sm_ips_ports', 'ct_state_ttl', 'ct_srv_src', 'ct_srv_dst',
-                              'ct_dst_ltm',
-                              'ct_src_ltm',
-                              'ct_src_dport_ltm', 'ct_dst_sport_ltm', 'ct_dst_src_ltm']
-    elif data_type == 'kdd99':
-        input_feature_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-                              '13', '14', '15', '16', '17', '18', '20', '21', '22', '23', '24', '25',
-                              '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37',
-                              '38', '39', '40']
+if __name__ == '__main__':
+    input_feature_list = general_parameters.input_feature_list[data_type]
 
     data_block = load_data(data_type, resampling_type, resampling_ratio, input_feature_list)
     scaled_feature = load_scaled_feature(data_type)
     data_block = one_hot(data_block)
 
     importlib.reload(pipeline_definition)
-    if model == 'ANN':
+    if classifier == 'ANN':
         pipeline = \
             pipeline_definition.ANN_pipeline(model_name='ANN',
                                              data_block=data_block,
@@ -124,7 +108,7 @@ for model in ['ANN', 'DTR']:
         pipeline.get_the_classification_results()
         pipeline.evaluate_the_results()
         pipeline.get_training_plot()
-    elif model == 'DTR':
+    elif classifier == 'DTR':
         pipeline = pipeline_definition.DTR_pipeline(model_name='DTR',
                                                     data_block=data_block,
                                                     input_feature_list=input_feature_list,

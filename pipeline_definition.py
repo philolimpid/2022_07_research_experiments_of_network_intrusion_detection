@@ -52,8 +52,8 @@ class ANN_pipeline():
 
         self.model = tf.keras.Sequential([
             tf.keras.layers.Flatten(),
-            tf.keras.layers.Dense(units=64, activation='relu'),
-            tf.keras.layers.Dense(units=64, activation='relu'),
+            tf.keras.layers.Dense(units=32, activation='relu'),
+            tf.keras.layers.Dense(units=32, activation='relu'),
             tf.keras.layers.Dense(units=self.output_numbers, activation='softmax')
         ])
 
