@@ -102,7 +102,7 @@ if __name__ == '__main__':
                                              version=version
                                              )
         pipeline.build_and_compile_model()
-        pipeline.fit(5)
+        pipeline.fit(10)
         pipeline.save_model_and_history()
         pipeline.load_model_and_history()
         pipeline.get_the_classification_results()
